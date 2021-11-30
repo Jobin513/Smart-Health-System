@@ -1,4 +1,3 @@
-# Smart-Health-System
+# Smart-Health-System - Team Error 404 
 By Jobin John, Joker Zhong, Jacen Wang, Aidan Smyth		
-Error 404 Project
-CSC 440 - Professor Li 
+   CSC 440 - Professor Li 
