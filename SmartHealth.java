@@ -36,6 +36,8 @@ public class SmartHealth {
 
         System.out.println("Do you feel swelling?");
         take_input(sc.nextInt(),"swell",database);
+        
+        System.out.println("We couldn't narrow down the options enough based on your answers. If you see this, we didn't ask enough questions!");
     }
 
     public static void take_input(int answer, String property, ArrayList database){
@@ -65,6 +67,10 @@ public class SmartHealth {
             System.out.println("your ailment is "+name);
             System.exit(0);
         }
+        if (database.size() == 0){
 
+            System.out.println("Hmmm... your symptoms don't match any ailments we currently have on file.");
+            System.exit(0);
+        }
     }
 }
