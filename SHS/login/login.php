@@ -9,7 +9,7 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
 }
  
 // Include file for connection
-include "connection.php";
+include 'connectdb.php';
  
 // Define variables and initialize with empty values
 $username = $password = "";
