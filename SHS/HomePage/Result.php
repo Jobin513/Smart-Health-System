@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-<title>Check Symptom</title>
+<title>Result</title>
 
 <!-- Fonts -->
 <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -67,43 +67,67 @@
 
     
     <div class="check_form">
-        <form action="result.php" name="checkform" accept-charset="utf-8" id="check_form" class="checkForm" method="post">
-          <input type="hidden" name="did" value="0"/>
+        <form action="" name="checkform" accept-charset="utf-8" id="check_form" class="checkForm" method="post"><input type="hidden" name="did" value="0"/>
        <input type="hidden" name="to" value="log"/>
+       
+       <?php
+       //embedded sql to retrieve data
+       //select everything from incident where incident id = POST['incidentID']
+       include('../login/connectdb.php');
+       $Symptom1 = $_POST['Symptopm1'];
+       $Symptom2 = $_POST['Symptopm2'];
+       $Symptom3 = $_POST['Symptopm3'];
+       $Symptom4 = $_POST['Symptopm4'];
+       $sql = "SELECT Title, Definition, Treatment FROM Disease WHERE Symptom1 LIKE 
+        '%{$Symptom1}%' OR Symptom2 LIKE '%{$Symptom2}%' OR Symptom3 LIKE '%{$Symptom3}%'
+        OR Symptom4 LIKE '%{$Symptom4}%'";
+ 
+       $result = $conn->query($sql);
+ 
 
-        <div class="SymptopmArea1" id="SymptopmArea1">
-        <div class="inputOuter" id="SymptopmArea1Area"> 
-            <input type="text" id="Symptopm1" name="Symptopm1" class="inputstyle" placeholder="Enter the first symptom"/>
+       $row = $result -> fetch_assoc()
+       ?>
+
+        
+        <div class="DiseaseName" id="DiseaseName">
+            <label class="input-tips" for="p">Title:</label> 
+        <div class="inputOuter" id="DiseaseNameArea"> 
+            <textarea id="DiseaseName" name="DiseaseName" class="inputstyle" readonly="readonly">
+            <?php echo $row["Title"]; ?>
+          </textarea>
         </div>
         </div>
 
-        <div class="SymptopmArea2" id="SymptopmArea2">
-            <div class="inputOuter" id="SymptopmArea2Area"> 
-                <input type="text" id="Symptopm2" name="Symptopm2" class="inputstyle" placeholder="Enter the second symptom"/>
+
+
+        
+        <div class="Definition" id="Definition">
+            <label class="input-tips" for="p">Definition:</label> 
+            <div class="inputOuter" id="DefinitionArea"> 
+                <textarea id="Definition" name="Definition" rows="4" cols="50" class="textareastyle" readonly="readonly">
+                <?php echo $row["Definition"]; ?>
+                </textarea>
             </div>
             </div>
 
-            <div class="SymptopmArea3" id="SymptopmArea3">
-                <div class="inputOuter" id="SymptopmArea3Area"> 
-                    <input type="text" id="Symptopm3" name="Symptopm3" class="inputstyle" placeholder="Enter the third symptom"/>
+            
+            
+            <div class="Treatment" id="Treatment" ">
+                <label class="input-tips-last" for="p">Treatment:</label> 
+                <div class="inputOuterArea" id="TreatmentArea"> 
+                    <textarea id="Treatment" name="Treatment" rows="4" cols="50" class="textareastyle" readonly="readonly">
+                    <?php echo $row["Treatment"]; ?>
+                    </textarea>
                 </div>
                 </div>
-
-                <div class="SymptopmArea4" id="SymptopmArea4">
-                    <div class="inputOuter" id="SymptopmArea4Area"> 
-                        <input type="text" id="Symptopm4" name="Symptopm4" class="inputstyle" placeholder="Enter the fourth symptom"/>
-                    </div>
-                    </div>
+        
 
 
        
-        <div  style="padding-left:50px;margin-top:20px;">
+        <div  style="padding-left:50px;margin-top:20px;"><a href="../HomePage/CheckSymptom.html">
             
-            <input type="Submit" value="Search" style="width:150px;" class="button_blue" />
+            <input type="button" value="Search again" style="width:150px;margin-top: 90px;" class="button_blue"/></a>
 
-            
-            <input type="reset" value="Empty content" style="width:150px; margin-top: 10px;" class="button_blue"/>
-        
         </div>
 
        
