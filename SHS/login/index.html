@@ -27,15 +27,18 @@
     
             
 			<div class="login_form">
-				<form name="loginform" accept-charset="utf-8" id="login_form" class="loginForm" method="post"><input type="hidden" name="did" value="0"/>
+				<form name="loginform" accept-charset="utf-8" action = "login.php"  id="login_form" class="loginForm" onsubmit = "return validation()" method="POST">
+
+                    <input type="hidden" name="did" value="0"/>
                <input type="hidden" name="to" value="log"/>
                 <div class="uinArea" id="uinArea">
                 
                 <div class="inputOuter" id="uArea">
                     
-                    <input type="text" id="u" name="username" class="inputstyle" placeholder="Email or Phone number"/>
+                    <input type="text" id="u" name="u" class="inputstyle" placeholder="Email or Phone number"/>
                 </div>
                 </div>
+
                 <div class="pwdArea" id="pwdArea">
                
                <div class="inputOuter" id="pArea">
@@ -45,7 +48,7 @@
                 </div>
                
                 <div style="padding-left:50px;margin-top:20px;">
-                    <input type="submit" value="Log In" style="width:150px;" class="button_blue" onclick="return checkuser()"/></div>
+                    <input type="submit" value="Log In" style="width:150px;" class="button_blue" /></div>
               </form>
            </div>
            
@@ -58,7 +61,7 @@
  
     <div class="qlogin" id="qlogin" style="display: none; ">
    
-    <div class="web_login"><form name="form2" id="regUser" accept-charset="utf-8"  action="" method="post">
+    <div class="web_login"><form name="form2" id="regUser" accept-charset="utf-8"  action="sign.php" method="post" onkeyup="validate()">
 	      <input type="hidden" name="to" value="reg"/>
 		      		       <input type="hidden" name="did" value="0"/>
         <ul class="reg_form" id="reg-ul">
@@ -79,7 +82,7 @@
                 </li>
                 <li>
                     <div class="inputOuter2">
-                        <input type="password" id="passwd2" name="" maxlength="16" class="inputstyle2" placeholder="Confirm Password:"/>
+                        <input type="password" id="passwd2" name="passwd2" maxlength="16" class="inputstyle2" placeholder="Confirm Password:"/>
                     </div>
                     
                 </li>
@@ -87,14 +90,14 @@
                 <li>
                     <div class="inputOuter2">
                        
-                        <input type="text" id="Email" name="Email" maxlength="10" class="inputstyle2" placeholder="Email:"/>
+                        <input type="text" id="Email" name="Email" maxlength="30" class="inputstyle2" placeholder="Email:" />
                     </div>
                    
                 </li>
                 
                 <li>
                     <div class="inputArea">
-                        <input type="button" id="reg"  style="margin-top:10px;margin-left:85px;" class="button_blue" value="Create Account"/> 
+                        <input type="submit" id="reg"  style="margin-top:10px;margin-left:85px;" class="button_blue" value="Create Account" oncanplay="return validate()"/> 
                     </div>
                     
                 </li><div class="cl"></div>
@@ -107,22 +110,42 @@
     </div>
 
 </div>
+<script>
+    function validation()
+    {
+        var id=document.f1.u.value;
+        var ps=document.f1.p.value;
+        if(id.length=="" && ps.length=="") {
+            alert("User Name and Password fields are empty");
+            return false;
+        }
+        else
+        {
+            if(id.length=="") {
+                alert("User Name is empty");
+                return false;
+            }
+            if (ps.length=="") {
+            alert("Password field is empty");
+            return false;
+            }
+        }
+    }
 
-</body>
-<script type="text/javascript"> 
-    function getValue(id) { 
-        return document.getElementById(id).value; 
-    } 
-    function checkuser() { 
-        if(getValue('u') == "error" && getValue('p') == "123") { 
-            
-            return true;
-            
-        }else { 
-            alert("Wrong username or password!")
-            return false; 
-        } 
-    } 
-    
+    function validate() {
+              var pwd1 = document.getElementById("passwd").value;
+              var pwd2 = document.getElementById("passwd2").value;
+		
+             if(pwd1 == pwd2) {
+               document.getElementById("tishi").innerHTML="<font color='green'>两次密码相同</font>";
+               document.getElementById("submit").disabled = false;
+              }
+              else {
+               document.getElementById("tishi").innerHTML="<font color='red'>两次密码不相同</font>";
+                document.getElementById("submit").disabled = true;
+              }
+          }
 </script>
+</body>
+
 </html>
